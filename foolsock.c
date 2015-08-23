@@ -99,7 +99,6 @@ static foolsock_t* create_new_resource(char* host, int port TSRMLS_DC)
 	int host_len = strlen(host);
 	foolsock_t* resource = (foolsock_t*)pemalloc(sizeof(foolsock_t),1);
 	if(resource == NULL){
-		printf("failed to alloc foolsock_t");
 		return NULL;
 	}
 	memset(resource, 0, sizeof(*resource));
@@ -159,8 +158,6 @@ static int get_stream(foolsock_t* f_obj TSRMLS_DC)
 	}
 
 	struct timeval tv = convert_timeoutms_to_ts(f_obj->timeoutms);
-
-	printf("%d\n",tv.tv_usec);
 
 	if(!f_obj->stream){
 		int socktype = SOCK_STREAM;
