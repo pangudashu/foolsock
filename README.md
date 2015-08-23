@@ -1,0 +1,2 @@
+# foolsock
+persistent socket connect 
