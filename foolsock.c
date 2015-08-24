@@ -395,10 +395,11 @@ PHP_METHOD(foolsock,pclose)
 	if(resource_type != le_foolsock){
 		RETURN_TRUE;
 	}
-	hash_key_len = spprintf(&hash_key, 0,"foolsock_connect:%s:%d", f_obj->host, f_obj->port);
-	zend_hash_del(&EG(persistent_list), hash_key, hash_key_len+1);
 
-	efree(hash_key);
+	if(f_obj->stream != NULL){
+		php_stream_pclose(f_obj->stream);
+		f_obj->stream = NULL;
+	}
 	
 	RETURN_TRUE;
 }
