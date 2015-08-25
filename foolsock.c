@@ -368,6 +368,12 @@ PHP_METHOD(foolsock,read)
 	response_buf = emalloc(size + 1);
 
 	int r = php_stream_read(f_obj->stream,response_buf,size);
+	if(r <= 0){
+		if(errno == EAGAIN || errno == EINPROGRESS){
+			RETURN_TRUE;
+		}
+		RETURN_FALSE;
+	}
 	response_buf[r] = '\0';
 	RETURN_STRINGL(response_buf,r,0);
 }
