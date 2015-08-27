@@ -17,7 +17,7 @@ foolsock对socket进行了一层简单的封装，将连接放在persistent_list
 使用foolsock可以将协议相关的逻辑也使用php实现，可以大大降低开发成本，foolsock/example/memcache_client.php提供了一个简单的memcache客户端的示例。
 
 ### 安装
-	从github下载源码后解压<br />
+	从github下载源码后解压
 	cd foolsock
 	phpize
 	./configure
