@@ -342,6 +342,10 @@ PHP_METHOD(foolsock,read)
 		RETURN_FALSE;
 	}
 
+	if(size <= 0){
+		RETURN_TRUE;
+	}
+
 	resource = zend_read_property(foolsock_ce,getThis(),ZEND_STRL(CLASS_PROPERTY_RESOURCE),1 TSRMLS_CC);
 	if(resource == NULL){
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid Resource");
