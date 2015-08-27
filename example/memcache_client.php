@@ -1,20 +1,20 @@
 <?php
 $memcache = new FoolSockMemcache('127.0.0.1',11211);
 
-//$memcache->Add("foolsock_memcache_test_key","This is a socket connect to memcached by foolsock~");
+$memcache->Add("foolsock_memcache_test_key","This is a socket connect to memcached by foolsock~",3600);
 
 $start = time();
-for($i = 0;$i < 10000;$i++){
+for($i = 0;$i < 100000;$i++){
 	$begin_time = microtime(true);
 	$value = $memcache->Get("foolsock_memcache_test_key");
 	if(false == $value){
 		echo "error to get\n";
 	}
-	echo $i,"->[",$value,"] [time : ",microtime(true) - $begin_time,"]\n";
+	echo $i,"->[",$value,"] [time : ",(microtime(true) - $begin_time)*1000," ms]\n";
 }
 
 $total_time = time()-$start;
-echo "total time : ",$total_time," qps : ",10000/$total_time,"\n";
+echo "total time : ",$total_time," qps : ",100000/$total_time," time per request : ",($total_time/100000)*1000,"[ms]\n";
 
 
 class FoolSockMemcache
