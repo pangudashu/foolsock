@@ -15,3 +15,13 @@ mysql、memcached这些扩展都是采用TCP与服务端进行通信，你肯定
 foolsock对socket进行了一层简单的封装，将连接放在persistent_list哈希表中，每个fastcgi进程连接后不会被释放，下次请求时直接使用。目前最大的连接数等于fastcgi进程数，当然你也可以自行修改下实现连接池的效果。
 
 使用foolsock可以将协议相关的逻辑也使用php实现，可以大大降低开发成本，foolsock/example/memcache_client.php提供了一个简单的memcache客户端的示例。
+
+### 安装
+	从github下载源码后解压<br />
+	cd foolsock
+	phpize
+	./configure
+	make && make install
+	最后将extension=foolsock.so加入php.ini，重启php-fpm或者其他fastcgi
+
+
