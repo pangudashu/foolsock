@@ -24,4 +24,18 @@ foolsock对socket进行了一层简单的封装，将连接放在persistent_list
 	make && make install
 	最后将extension=foolsock.so加入php.ini，重启php-fpm或者其他fastcgi
 
+### 使用
+	<?php
+	$sock = new FoolSock(string $host,int $port);
+	//connect
+	$r = $sock->pconnect([ int $timeoutms ]);  //超时时间,单位:毫秒
+	if(false === $r){
+		exit();
+	}
+
+	//write
+	$sock->write(string $msg);//返回false时可以调用$sock->pclose()关闭再重连$sock->pconnect()
+
+	//read
+	$sock0->read(int $read_buf_size); //超时时间大于0时如果read无数据返回此操作将会阻塞直至超时
 
