@@ -39,3 +39,5 @@ foolsock对socket进行了一层简单的封装，将连接放在persistent_list
 	//read
 	$sock0->read(int $read_buf_size); //超时时间大于0时如果read无数据返回此操作将会阻塞直至超时
 
+### 示例
+example/memcache_client.php提供了一个简单的memcache客户端的例子(使用memcache二进制协议)，实现memcache两个基本操作:Add/Get，经过测试处理效率与使用memcache扩展相当

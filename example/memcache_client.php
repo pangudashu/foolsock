@@ -1,5 +1,6 @@
 <?php
-$memcache = new FoolSockMemcache('127.0.0.1',11211);
+//$memcache = new FoolSockMemcache('127.0.0.1',11211);
+$memcache = new FoolSockMemcache('10.147.8.139',11211);
 
 $memcache->Add("foolsock_memcache_test_key","This is a socket connect to memcached by foolsock~",3600);
 
@@ -52,7 +53,11 @@ class FoolSockMemcache
 		if(false === $body){
 			return false;
 		}
-		return substr($body,4);
+		if($response_header['status'] != 0){
+			return $body;
+		}else{
+			return substr($body,4);
+		}
 	}/*}}}*/
 
 	public function Add($key,$value,$expire = 0)
